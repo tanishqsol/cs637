@@ -1,0 +1,516 @@
+
+*
+{
+border: 0;
+padding: 0;
+margin:0;
+font-family: 'Antic';font-size: 22px;
+
+
+
+
+}
+.Intro{
+    height: 70vh;
+    width: 100%;
+     position: relative;
+    background-size: cover;
+    height: 70vh;
+    box-shadow: -5px 1px 3px 3px black;
+}
+
+h2
+{
+    display: flex;
+    width: 500px;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 94px;
+    border-radius: 16px;
+    box-shadow: 10px 5px 7px black;
+    font-family: 'limelight';font-size: 30px;
+    
+    
+    
+ 
+}
+.introDiv{
+    height:79vh;
+    width: 100%;
+}
+#CV
+{
+    position: absolute;
+    right:20%;
+    color: aliceblue;
+}
+#skills
+{
+    font-size: 40px;
+    color: aliceblue;
+    font-family: 'limelight';font-size: 37px;
+    background:rgba(0, 0, 0,0.8);
+    padding: 8px 24px;
+    border-radius: 16px;
+ 
+}
+#skillset
+{
+    font-size: 80px;
+    background:#1e4ec7;
+    padding: 8px 24px;
+    border-radius: 16px;
+    position: absolute;
+    left: 50%;
+}
+
+
+.myName
+{
+    position: absolute;
+    font: #979797;
+    
+    top: 20%;
+    background-size: cover;
+    background-color: rgba(119, 117, 117, 0.8)
+
+    
+}
+#typing
+{   
+    font-size: 40px;
+    font-weight: 100;
+    position: relative;
+    top: 40%;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(184, 162, 66);
+    background-color:rgba(0,0,0,0);
+    font-weight: bolder;
+    text-align: center;
+}
+
+#typing2
+{   
+    font-size: 60px;
+    font-weight: 100;
+    position: relative;
+    left: 50%;
+    top: 25%;
+}
+
+
+
+.move{
+    
+    display: flex;
+    position: relative;
+    align-content: center;
+    justify-content: center;
+    background-color: #3c5b9b;
+    background: url(https://i.ibb.co/C0cp6C5/new-york-2.jpg);
+    background-size:cover; 
+    width: cover;
+    height: 79vh;
+    
+    
+}
+.move:after
+{
+    
+        position: absolute;
+        width: 100%;
+        height: inherit;
+        content:'';
+        background:inherit;
+        z-index: -1;
+        top: 0%;
+        left: 0;
+        bottom:0%;
+        right: 0%;
+        transform-origin: top left;
+        transform: skewy(2deg);
+    
+    
+}
+@media screen and (max-width:200px)
+{
+    .move
+    {
+        width:100%;
+        
+    }
+    .move:after{
+        width:100%;
+    }
+   
+    .h2
+    {
+            padding: 80px 100px;
+    }
+}
+
+
+
+#third
+{
+    position: relative;
+    height: 80vh;
+}
+.intro-text
+{
+   
+    opacity: 0;
+    position: absolute;
+    top:30%;
+    left:30%;
+    font-size: 25px;
+    /* transform: translateY(100px); */
+    /* transition: 1s all ease-in; */
+    /* -ms-transform: translate(-50%, -50%); */
+    z-index: 4;
+}
+.intro-appear
+{
+    
+    opacity: 1;
+    transform: translate(0px);
+}
+
+.show
+{
+    display: none;
+}
+jscript:hover + .show
+{
+    
+   color: aqua;
+   display: block;
+   position: absolute;
+   top:20%;
+    
+}
+   
+
+#particles-js2{
+   
+    display: flex;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width: 101px;
+    background-size:40%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+   
+
+}
+
+#move2{
+  
+    
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background: url(programming.jpg);
+    box-shadow: -5px 1px 3px 3px black;
+    background-size: cover;
+    
+    width: 100%;
+    height: 50vh;
+}    
+@media screen and (max-width: 200px)
+{
+    #move2{
+    width: 100%;
+    
+    }
+}
+
+
+#move3{
+  
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background: url(blackboard.jpg);
+    box-shadow: -5px 1px 3px 3px black;
+    background-size: cover;
+    
+    width: 100%;
+    height: 50vh;
+}    
+
+#move4{
+  
+    
+    position: relative;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background: url(work_exp.jpg);
+    box-shadow: -5px 1px 3px 3px black;
+    background-size: cover;
+    
+    width: cover;
+    height: 50vh;
+}    
+
+
+
+.flex{
+    height: 100vh;
+    width: 100%;
+    
+    
+
+}
+.flex-container {
+    display: flex;
+flex-wrap: wrap;
+position: relative;
+justify-content: center;
+align-items: center;
+height: 100%;
+flex-direction: column;
+    
+  }
+  
+  .flex-container  div {
+     margin: 10px;
+    padding: 10px;
+    font-size: 30px;
+    
+  }
+
+.flex2{
+    height: 100vh;
+    width: 100%;
+    
+    
+    
+
+}
+
+  
+  .flex-container2  div {
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    height: 10vh;
+    
+    
+     margin: 30px;
+    padding: 40px;
+    font-size: 30px;
+    flex-direction: row;
+    
+  }
+
+  .flex3{
+    height: 80vh;
+    width: 100%;
+    
+    
+    
+
+}
+  
+  .flex-container3 div {
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    height: 0vh;
+    margin: 30px;
+    padding: 40px;
+    font-size: 30px;
+    flex-direction: row;
+    
+  }
+
+
+#cert
+{
+    position: absolute;
+    left:40%;
+    font-size: 40px;
+    color: aliceblue;
+    font-family: 'limelight';font-size: 30px;
+    background:rgba(0, 0, 0 , 0.8);
+    padding: 8px 24px;
+    border-radius: 16px;
+
+
+}
+
+#dem_fluence
+{
+    font-size: 60%;
+}
+#progressive
+{
+    font-size: 60%;
+}
+#exp
+{
+    position: absolute;
+    top:20%;
+    left: 43%;
+    font-size: 40px;
+    color: aliceblue;
+    font-family: 'limelight';font-size: 30px;
+    background:rgba(0, 0,0,0.9);
+    padding: 8px 24px;
+    border-radius: 16px;
+
+    
+}
+
+#company_1
+{
+    color: #3c5b9b
+}
+
+#company_2
+{
+    color: #3c5b9b
+}
+#dem_fluence
+{
+    font-style: italic; 
+}
+#progressive
+{
+    font-style: italic;
+    height: 40vh;
+}
+
+
+
+
+
+.header {
+    position: relative;
+    width: 100%;
+    
+    background-color: rgba(78, 77, 77, 0.6);
+    z-index: 1;
+  }
+  
+  .header a {
+    float: left;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px; 
+    line-height: 25px;
+    border-radius: 4px;
+    
+    
+  }
+  
+  .header a.logo {
+    position: absolute;  
+    font-size: 25px;
+    font-weight: bold;
+    left:50%;
+  }
+  
+  
+  .header a:hover {
+    background-color: rgb(169, 217, 248);
+    color: black;
+  }
+  
+  .header a.active {
+    background-color: rgb(88, 89, 90);
+    color: white;
+  }
+  
+  .header-right {
+      position: relative;
+    float: right;
+    right:15px;
+  }
+  
+  @media screen and (max-width: 200px) {
+    .header a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+    
+    .header-right {
+      float: none;
+    }
+  }
+  #exp_two
+  {
+    height: 10%;
+  }
+  .slantdiv
+  { 
+      display: flex;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width:cover;
+      height: 25vh;
+      background:url(footer_6.jpg);
+      
+      z-index: 1;     
+      
+      padding: 30px;
+      color: #fff;
+      
+
+
+    }
+
+.slantdiv:after
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content:'';
+    background-image:inherit;
+    z-index: -1;
+    top: 0%;
+    left: 0;
+    bottom:0%;
+    right: 0%;
+    transform-origin: bottom right;
+    transform: skewy(2deg);
+    
+
+}
+
+
+#for
+{
+    padding:40px;
+    font-size: 15px;
+    position: absolute;
+    top:60px;
+    left:40px;
+    top:10%;
+    
+}
+#netcracker_logo
+{
+    position: absolute;
+    left:40px;
+    margin: 30px;
+    padding:30px; 
+}
+#no_anim
+{
+    position: absolute;
+    left:70%;
+    
+}
+

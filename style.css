@@ -1,0 +1,210 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: scroll;
+    /* background-image: linear-gradient(-75deg, rgb(26, 27, 39), rgb(96, 90, 98)); */
+    box-shadow:black;
+    color: aliceblue;
+
+}
+input{
+    color: aliceblue;
+}
+
+.horizontal-scroll-container {
+    display: flex;
+    flex-wrap: nowrap;
+    min-height: 100vh;
+    /* overflow-x: hidden;  */
+    scroll-behavior: smooth;
+    position: relative;
+    z-index: 1;
+}
+.user-info {
+    display: flex;
+    justify-content: space-between;
+}
+.image-crop-popup{
+    display: flex;
+    flex-direction: row;
+}
+.button-group {
+    display: flex; /* Aligns children inline */
+    align-items: center; /* Centers items vertically */
+    justify-content: space-around; /* Spaces items evenly */
+}
+
+#image-input {
+    margin-right: 10px; /* Adds some space between the file input and the buttons */
+}
+
+/* You can add styles to your buttons as needed */
+#crop-button, #close-button {
+    cursor: pointer;
+    margin-left: 10px; /* Adds some space between the buttons */
+    /* Add additional styles here */
+}
+#cropped-image-container {
+    /* border: 1px solid #ccc; */
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+.cropper-container cropper-bg{
+height: 500vh, important !important;;
+}
+.popup {
+    position: fixed; /* or 'absolute' if 'fixed' doesn't work well with your layout */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100; /* Ensure it's above other elements */
+    background-color: white; /* Or any color you prefer */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    max-height: 100vh; 
+    /* height: fit-content; */
+    overflow-y: auto; /* Enable scrolling if the content is too tall */
+  }
+#cropped-image-container img {
+    max-width: 100%; /* Adjust as needed */
+}
+.cropBtn {
+    text-align: center; /* Center align the buttons */
+    margin-top: 20px; /* Add some space above the buttons */
+    cursor: pointer;
+
+  }
+  
+  /* Additional styles for buttons if needed */
+  .uploadButton {
+    cursor: pointer;
+    margin: 0 10px; /* Add space around buttons */
+    cursor: pointer;
+    padding: 10px 20px; /* Increase button padding */
+    border: none;
+    background-color: #3498db; /* Example button color */
+    color: white;
+    border-radius: 5px;
+  }
+  
+  /* Close button specific style */
+  #close-popup {
+    background-color: #e74c3c; /* Example color for close button */
+  }
+
+/* Additional styling for the content inside the popup, if necessary */
+.popup-content {
+    margin: 0 auto; /* Center horizontally */
+    max-width: 50px; /* Maximum width */
+}
+#image-input{
+    cursor: pointer;
+
+}
+.section {
+    flex-shrink: 0;
+    /* background: none; */
+    /* transition: transform 0.5s ease; Smooth transition for sliding effect */
+
+    width: 100vw; /* Each section takes full viewport width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* For positioning the buttons */
+
+}
+.vanta-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure the Vanta.js effect is in the background */
+}
+.intro{
+    height: 20vh;
+    color: #fff;
+}
+.swiper-slide {
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,.1);
+}
+
+#project-description, #headings,#headings2{
+    color:white;
+}
+.workex-description{
+    color:white;  
+}
+.form-container{
+    width: 60%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    background-image: linear-gradient(75deg, rgb(26, 27, 39), rgb(84, 62, 101));
+    color: white;
+    border-radius: 8px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+#experience-container{
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    /* background-color: #fff; */
+    background-image: linear-gradient(75deg, rgb(26, 27, 39), rgb(84, 62, 101));
+
+    border-radius: 8px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+.next-button {
+    position: absolute;
+    border: none;
+    /* background-color: #4CAF50; */
+    background-image: url(right-arrow.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+/* border: 1px solid rgb(61, 61, 61); */
+    /* color: white; */
+    padding: 10px 15px;
+    cursor: pointer;
+    /* opacity: 0; Start invisible */
+    transition: opacity 2s ease; /* Smooth transition for the fade-in effect */
+}
+
+.back-button {
+    position: absolute;
+    border: none;
+    /* background-color: #4CAF50; */
+    background-image: linear-gradient(75deg,  rgb(132, 75, 161),rgb(20, 35, 36));
+    border: 1px solid rgb(61, 61, 61);
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    /* opacity: 0; Start invisible */
+    transition: opacity 2s ease; /* Smooth transition for the fade-in effect */
+}
+.addButton{
+    /* background-image: linear-gradient(75deg,  rgb(132, 75, 161),rgb(20, 35, 36)); */
+    margin-left: 1em;
+    /* background: black; */
+
+}
+.image-upload-container{
+    margin:5%}
+.next-button {
+    right: 20px;
+    margin:0.5em;
+}
+.back-button {
+    left: 20px;
+}
+.show-button {
+    opacity: 1; /* Fully visible */
+}
