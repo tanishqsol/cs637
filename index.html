@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Horizontal Scrolling Form</title>
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://unpkg.com/cropperjs/dist/cropper.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+
+</head>
+
+
+
+<body>
+
+    <div id="vanta-bg-1" class="vanta-bg"></div>
+    <div id="vanta-bg-2" class="vanta-bg" style="display: none;"></div>
+
+    <div class="horizontal-scroll-container" id="scroll-container">
+        <!-- First Name & Last Name Section -->
+        <div class="section" style="position: relative; z-index: 2;">
+            <div class="form-container">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email">
+                <label for="phone">Phone No:</label>
+                <input type="number" id="phone" name="phone">
+                <label for="website">Website:</label>
+                <input type="text" id="website" name="website">
+
+
+
+
+
+                <div id="image-crop-popup" class="popup">
+                    <img id="image" style="max-width: 100%; display: none;">
+                    <div class="button-group">
+                        <input type="file" id="image-input" accept="image/*">
+                        <button id="crop-button">Crop</button>
+                        <button id="close-button">Close</button>
+                    </div>
+                </div>
+            </div>
+            <div id="cropped-image-container">
+                <!-- Cropped image will be displayed here -->
+            </div>
+            <button class="uploadButton" onclick="openCropPopup()">Upload Image</button>
+            <img class="next-button" onclick="changeBackground()"></img>
+
+        </div>
+
+        <!-- First Name & Last Name Section -->
+
+
+        <!-- Introduction Section -->
+        <div class="section" style="position: relative; z-index: 2;">
+            <div class="form-container">
+                <label for="introduction">Introduction:</label>
+                <textarea class="intro" id="introduction" color="white" name="introduction"></textarea>
+            </div>
+            <button class="back-button">Back</button>
+            <button class="next-button" onclick="saveDataToFirebase()">Next</button>
+        </div>
+        <!-- Introduction Section -->
+
+        <!-- Skills Section -->
+
+        <div class="section" style="position: relative; z-index: 2;">
+            <h3 id="headings">Add Skills</h3>
+            <p id="headings2">Upto 5</p>
+
+            <div class="form-container" id="skills-container">
+                <label for="skill1">Skill</label>
+                <input type="text" id="skill1" name="skill1">
+                <!-- Additional skills will be added here -->
+            </div>
+            <button id="add-skill-button" class="addButton"
+                onclick="addInputField('skills-container', 'skill')">+</button>
+            <button class="back-button">Back</button>
+            <button class="next-button" onclick="saveDataToFirebase()">Next</button>
+        </div>
+        <!-- Skills Section -->
+
+        <!-- Project Section -->
+        <div class="section" style="position: relative; z-index: 2;">
+            <div id="project-form-section">
+                <h3 id="headings">Add Projects</h3>
+                <p id="headings2">Upto 5</p>
+
+                <form id="project-form">
+                    <input type="text" id="project-title" placeholder="Project Title" required>
+                    <textarea id="project-description" placeholder="Project Description" required></textarea>
+                    <button type="button" onclick="addProject(event)">Add Project</button>
+                </form>
+            </div>
+            <!-- Project entries will be appended here -->
+            <div id="project-container"></div>
+            <button class="back-button">Back</button>
+            <button class="next-button" onclick="saveDataToFirebase()">Next</button>
+        </div>
+        <!-- Certifications Section -->
+
+        <!-- Work Experience Section -->
+        <div class="section" style="position: relative; z-index: 2;">
+            <div id="experience-container">
+                <!-- Experience entries will be added here -->
+            </div>
+            <button class="back-button">Back</button>
+
+            <button id="add-experience-button" onclick="addExperienceEntry()">Add Experience</button>
+            <a href="resumeBuilder/index1.html" onclick="saveDataToFirebase()" class="next-button">Next</button>
+
+        </div>
+        <!-- Work Experience Section -->
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+    <!-- Load the Vanta.js HALO effect -->
+    <script src="https://cdn.jsdelivr.net/gh/tengbao/vanta/dist/vanta.halo.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tengbao/vanta/dist/vanta.dots.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-database.js"></script>
+    <script src="https://unpkg.com/cropperjs"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-storage.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyC3XNJ4qLJ10JEmH7LeC0OIfNYpDrh8sMM",
+            authDomain: "resumebuilder-7dc6e.firebaseapp.com",
+            databaseURL: "https://resumebuilder-7dc6e-default-rtdb.firebaseio.com",
+            projectId: "resumebuilder-7dc6e",
+            storageBucket: "resumebuilder-7dc6e.appspot.com",
+            messagingSenderId: "1053552722170",
+            appId: "1:1053552722170:web:3ba31d71563be34908c943"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script>
+        function saveDataToFirebase(experienceData) {
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var email = document.getElementById('email').value;
+            var phone = document.getElementById('phone').value;
+            var website = document.getElementById('website').value;
+
+            var introduction = document.getElementById('introduction').value;
+            var skillGroups = document.querySelectorAll('#skills-container .skill-input-group');
+            var certificationInputs = document.querySelectorAll('#certifications-container input[type="text"]');
+            var experienceInputs = document.querySelectorAll('#experience-container input[type="text"]');
+            var certifications = Array.from(certificationInputs).map(input => input.value).filter(cert => cert.trim() !== '');
+            var experience = Array.from(experienceInputs).map(input => input.value).filter(exp => exp.trim() !== '');
+            var projectEntries = document.querySelectorAll('.project-entry');
+            var projectsData = Array.from(projectEntries).map(entry => {
+                return {
+                    title: entry.querySelector('.project-title').value,
+                    description: entry.querySelector('.project-description').value
+                };
+            });
+
+            var skillsData = Array.from(skillGroups).map(group => {
+                var skillInput = group.querySelector('input[type="text"]');
+                var proficiencySlider = group.querySelector('input[type="range"]');
+
+                if (skillInput && skillInput.value.trim() !== '') {
+                    return {
+                        skill: skillInput.value.trim(),
+                        proficiency: proficiencySlider ? proficiencySlider.value : '3' // Default value if slider not found
+                    };
+                }
+                return null;
+            }).filter(item => item !== null);
+
+
+
+
+            var data = {
+                firstName: firstName,
+                lastName: lastName,
+                imageUrl: imageUrl,
+                introduction: introduction,
+                skills: skillsData,
+                projects: projectsData,
+                experience: experienceData,
+                email:email,
+                phone:phone,
+                website:website
+
+
+            };
+
+            var database = firebase.database();
+            var ref = database.ref('submissions').push();
+            console.log('data posting:', data);
+
+            // Save data to the new reference
+            ref.set(data, function (error) {
+                if (error) {
+                    console.log('Error saving data:', error);
+                } else {
+                    console.log('Data saved successfully');
+                }
+            });
+            // console.log(data);
+        }
+
+    </script>
+    <script>
+        let vantaEffect1, vantaEffect2;
+
+        function changeBackground() {
+            if (vantaEffect1) {
+                vantaEffect1.destroy();
+            }
+            document.getElementById('vanta-bg-1').style.display = 'none';
+            document.getElementById('vanta-bg-2').style.display = 'block';
+
+            if (!vantaEffect2) {
+                VANTA.DOTS({
+                    el: "#vanta-bg-2",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: true,
+                    minHeight: 500.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 47.00,
+                    size: 3.10,
+                    spacing: 66.00
+                });
+            }
+        }
+
+        vantaEffect1 = VANTA.HALO({
+            el: "#vanta-bg-1",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00
+        });
+    </script>
+    <script>
+        document.getElementById('image-crop-popup').style.display = 'none'
+        function openCropPopup() {
+            document.getElementById('image-crop-popup').style.display = 'block';
+        }
+        var cropper;
+
+        document.getElementById('image-input').addEventListener('change', function (e) {
+            var files = e.target.files;
+            if (files && files.length > 0) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('image').src = e.target.result;
+                    document.getElementById('image').style.display = 'block';
+                    if (cropper) {
+                        cropper.destroy(); // Destroy the previous instance of Cropper
+                    }
+                    cropper = new Cropper(document.getElementById('image'), {
+                        aspectRatio: 2 / 3,
+                        viewMode: 1,
+                    });
+                };
+                reader.readAsDataURL(files[0]);
+            }
+        });
+        function addProject(event) {
+            event.preventDefault();
+
+            var projectTitle = document.getElementById('project-title').value;
+            var projectDescription = document.getElementById('project-description').value;
+
+            var projectEntry = document.createElement('div');
+            projectEntry.className = 'project-entry';
+
+            var titleInput = document.createElement('input');
+            titleInput.type = 'text';
+            titleInput.className = 'project-title';
+            titleInput.value = projectTitle;
+            projectEntry.appendChild(titleInput);
+
+            var descriptionInput = document.createElement('input');
+            descriptionInput.type = 'text';
+            descriptionInput.className = 'project-description';
+            descriptionInput.value = projectDescription;
+            projectEntry.appendChild(descriptionInput);
+
+            var projectContainer = document.getElementById('project-container');
+            projectContainer.appendChild(projectEntry);
+
+            // Clear the form fields
+            document.getElementById('project-title').value = '';
+            document.getElementById('project-description').value = '';
+        }
+
+
+        document.getElementById('crop-button').addEventListener('click', function () {
+            cropper.getCroppedCanvas({
+                width: 300,
+                height: 500
+            }).toBlob(function (blob) {
+                // Display the cropped image in the container
+                var url = URL.createObjectURL(blob);
+                document.getElementById('cropped-image-container').innerHTML = '<img src="' + url + '" alt="Cropped Image" style="width: 100%;">';
+
+                // Upload the cropped image to Firebase Storage
+                var storageRef = firebase.storage().ref('cropped_images/' + Date.now() + '.jpg');
+                var uploadTask = storageRef.put(blob);
+
+                uploadTask.on('state_changed',
+                    function (snapshot) {
+                        // Optional: Handle the upload progress
+                    },
+                    function (error) {
+                        // Handle unsuccessful uploads
+                        console.error("Error uploading file:", error);
+                    },
+                    function () {
+                        // Get the download URL
+                        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                            console.log("File available at", downloadURL);
+                            // Save the URL for later use, e.g., saving it along with other form data
+                            imageUrl = downloadURL;
+                        });
+                    }
+                );
+            });
+            document.getElementById('image-crop-popup').style.display = 'none'; // Close the popup after cropping
+        });
+
+        document.getElementById('close-button').addEventListener('click', function () {
+            document.getElementById('image-crop-popup').style.display = 'none';
+        });
+
+
+
+    </script>
+
+    <script>
+        function scrollToSection(element, isNext) {
+            var currentSection = element.parentElement;
+            var targetSection = isNext ? currentSection.nextElementSibling : currentSection.previousElementSibling;
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            }
+        }
+
+        document.querySelectorAll('.next-button').forEach(button => {
+            button.addEventListener('click', () => scrollToSection(button, true));
+        });
+
+        document.querySelectorAll('.back-button').forEach(button => {
+            button.addEventListener('click', () => scrollToSection(button, false));
+        });
+
+        // Intersection Observer to watch when sections come into view
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                var buttons = entry.target.querySelectorAll('.next-button, .back-button');
+                buttons.forEach(function (button) {
+                    if (entry.isIntersecting) {
+                        button.classList.add('show-button');
+                    } else {
+                        button.classList.remove('show-button');
+                    }
+                });
+            });
+        }, { threshold: 0.5 }); // Adjust threshold as needed
+
+        // Add all sections to the observer
+        document.querySelectorAll('.section').forEach(function (section) {
+            observer.observe(section);
+        });
+
+        // Prevent default scroll behavior
+        document.addEventListener('wheel', function (e) {
+            e.preventDefault();
+            var container = document.querySelector('.horizontal-scroll-container');
+            container.scrollLeft += e.deltaY;
+        });
+        function fetchLatestCertifications() {
+            var ref = firebase.database().ref('submissions');
+
+            // Query the last submission
+            ref.orderByKey().limitToLast(1).once('value', function (snapshot) {
+                // Get the value of the latest entry
+                var data = snapshot.val();
+                if (data) {
+                    // 'data' is an object containing the latest entry as its value
+                    var lastEntryKey = Object.keys(data)[0]; // Get the key of the last entry
+                    var certifications = data[lastEntryKey].certifications;
+                    if (certifications) {
+                        displayCertifications(certifications);
+                    } else {
+                        // Handle case where there are no certifications
+                        console.log('No certifications found for the latest entry.');
+                    }
+                } else {
+                    // Handle case where there are no submissions
+                    console.log('No submissions found.');
+                }
+            }, function (error) {
+                console.error('Error fetching certifications:', error);
+            });
+        }
+
+
+
+
+        function addInputField(containerId, fieldName) {
+            var container = document.getElementById(containerId);
+            var existingSkillInputs = container.querySelectorAll('input[type="text"]').length;
+
+            var existingSkillInputs = container.querySelectorAll('.skill-input-group').length;
+            var newInputNumber = existingSkillInputs + 1;
+
+            if (existingSkillInputs < 4) {
+                var skillGroupDiv = document.createElement('div');
+                skillGroupDiv.className = 'skill-input-group';
+
+                // Create new skill input
+                var newInput = document.createElement('input');
+                newInput.type = 'text';
+                newInput.id = fieldName + newInputNumber;
+                newInput.name = fieldName + newInputNumber;
+                newInput.placeholder = 'Skill: ' + newInputNumber;
+                skillGroupDiv.appendChild(newInput);
+
+                // Create new proficiency slider
+                var proficiencySlider = document.createElement('input');
+                proficiencySlider.type = 'range';
+                proficiencySlider.id = 'proficiency' + newInputNumber;
+                proficiencySlider.name = 'proficiency' + newInputNumber;
+                proficiencySlider.min = '1';
+                proficiencySlider.max = '100';
+                proficiencySlider.value = '50'; // Set a default value
+                skillGroupDiv.appendChild(proficiencySlider);
+
+                container.appendChild(skillGroupDiv);
+            }
+
+            if (newInputNumber === 5) {
+                document.getElementById('add-skill-button').disabled = true;
+            }
+        }
+        function addExperienceEntry() {
+            var container = document.getElementById('experience-container');
+            var existingEntries = container.querySelectorAll('.experience-entry').length;
+
+            if (existingEntries < 5) {
+                var entryDiv = document.createElement('div');
+                entryDiv.className = 'experience-entry';
+
+                // Job Role Field
+                var jobRoleInput = document.createElement('input');
+                jobRoleInput.setAttribute('type', 'text');
+                jobRoleInput.setAttribute('placeholder', 'Job Role');
+                entryDiv.appendChild(jobRoleInput);
+
+                // Company Name Field
+                var companyNameInput = document.createElement('input');
+                companyNameInput.setAttribute('type', 'text');
+                companyNameInput.setAttribute('placeholder', 'Company Name');
+                entryDiv.appendChild(companyNameInput);
+
+                // Brief Description Field
+                var descriptionInput = document.createElement('textarea');
+                descriptionInput.setAttribute('placeholder', 'Brief Description');
+                descriptionInput.className = "workex-description"
+                entryDiv.appendChild(descriptionInput);
+
+                container.appendChild(entryDiv);
+            }
+            var experienceEntries = Array.from(container.querySelectorAll('.experience-entry')).map(entry => {
+                var jobRole = entry.querySelector('[placeholder="Job Role"]').value;
+                var companyName = entry.querySelector('[placeholder="Company Name"]').value;
+                var description = entry.querySelector('[placeholder="Brief Description"]').value;
+
+                return {
+                    role: jobRole,
+                    company: companyName,
+                    description: description
+                };
+            });
+
+            // Use this structured experience data when saving to Firebase
+            saveDataToFirebase(experienceEntries);
+        }
+        if (existingEntries + 1 === 5) {
+            document.getElementById('add-experience-button').disabled = true;
+        }
+
+
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
